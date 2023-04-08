@@ -8,6 +8,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
+import { register } from "./controllers/auth.js";
 
 
 //configurations 
@@ -18,7 +19,7 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(helmet());
-app.use(helmet.crossOriginEmbedderPolicy({ policy: "cross-origin" }));
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin"}));
 app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
@@ -38,6 +39,10 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage });
+
+//working on the Authorization part, routes with files
+
+app.post("/auth/register", upload.single("picture"), register);
 
 
 //setting Up Mongoose
