@@ -9,8 +9,11 @@ import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
 import { register } from "./controllers/auth.js";
+import postRoutes from "./routes/posts.js";
+import { createPost } from "./controllers/posts.js";
 import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/users.js";
+import { verifyToken } from "./middleware/auth.js";
 
 
 
@@ -44,14 +47,18 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-//working on the Authorization part, routes with files
+//working on the Authorization part, Routes with files
 app.post("/auth/register", upload.single("picture"), register); //we could have used the verifyToken here but since users are just registering the accounts here, they don't need to have verified emails or IDs
+app.posts("/posts", verifyToken, upload.single("picture"), createPost); //createPost is going to be a controller that we will setup
 
 
 
 //routes
 app.use("/auth", authRoutes); //this will help us set up Routes
 app.use("/users", userRoutes);
+//handling the final set of Routes - Posts
+app.use("/posts", postRoutes);
+
 
 
 
