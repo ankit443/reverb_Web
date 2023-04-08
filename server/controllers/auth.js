@@ -71,7 +71,7 @@ export const login = async (req, res) => {
 
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
         delete user.password;
-        res.status(200).json({ token, user});
+        res.status(200).json({ token, user}); //we can definitely not be able to verify that this the use-case for authentication but it's okay to use it for the sign-in and vor verification purposes.
         
 
 
@@ -79,4 +79,6 @@ export const login = async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 }
+
+
 
