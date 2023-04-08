@@ -10,6 +10,8 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { register } from "./controllers/auth.js";
 import authRoutes from "./routes/auth.js";
+import userRoutes from "./routes/users.js";
+
 
 
 
@@ -43,10 +45,14 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 //working on the Authorization part, routes with files
-app.post("/auth/register", upload.single("picture"), register);
+app.post("/auth/register", upload.single("picture"), register); //we could have used the verifyToken here but since users are just registering the accounts here, they don't need to have verified emails or IDs
+
+
 
 //routes
 app.use("/auth", authRoutes); //this will help us set up Routes
+app.use("/users", userRoutes);
+
 
 
 
