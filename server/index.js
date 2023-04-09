@@ -14,6 +14,10 @@ import { createPost } from "./controllers/posts.js";
 import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/users.js";
 import { verifyToken } from "./middleware/auth.js";
+import User from "./models/User.js";
+import Post from "./models/Post.js";
+import { users, posts } from "./data/index.js";
+
 
 
 
@@ -49,7 +53,7 @@ const upload = multer({ storage });
 
 //working on the Authorization part, Routes with files
 app.post("/auth/register", upload.single("picture"), register); //we could have used the verifyToken here but since users are just registering the accounts here, they don't need to have verified emails or IDs
-app.posts("/posts", verifyToken, upload.single("picture"), createPost); //createPost is going to be a controller that we will setup
+app.post("/posts", verifyToken, upload.single("picture"), createPost); //createPost is going to be a controller that we will setup
 
 
 
@@ -71,4 +75,13 @@ mongoose.connect(process.env.MONGO_URL, {
     useUnifiedTopology: true,
 }).then(() => {
     app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
+
+
+    //the commented out part below will update MongoDB with the fake data in the database
+
+    //add this data only one time
+    User.insertMany(users);
+    Post.insertMany(posts);
+
+
 }).catch((error) => console.log(`${error} did not connect`))
