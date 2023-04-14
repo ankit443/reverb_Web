@@ -56,7 +56,7 @@ const Navbar = () => {
                         },
                     }}
                 >
-                    Reverb
+                    Sociopedia
                 </Typography>
                 {isNonMobileScreens && (
                     <FlexBetween
@@ -73,7 +73,7 @@ const Navbar = () => {
                 )}
             </FlexBetween>
 
-            {/* Desktop Nav Bar */}
+            {/* DESKTOP NAV */}
             {isNonMobileScreens ? (
                 <FlexBetween gap="2rem">
                     <IconButton onClick={() => dispatch(setMode())}>
@@ -119,7 +119,7 @@ const Navbar = () => {
                 </IconButton>
             )}
 
-            {/* Mobile Nav Bar */}
+            {/* MOBILE NAV */}
             {!isNonMobileScreens && isMobileMenuToggled && (
                 <Box
                     position="fixed"
