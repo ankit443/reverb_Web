@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+// import authReducer from "state";
 import authReducer from ".state";
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
@@ -33,12 +34,14 @@ const store = configureStore({
     }),
 });
 
+//redux is one of the old libraries and it has most of its edge cases solved unlike others with the newer libraries
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistStore(store)}>
+      <PersistGate loading={null} persistor={persistStore(store)}> 
         <App />
       </PersistGate>
     </Provider>
