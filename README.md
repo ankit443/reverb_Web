@@ -1,4 +1,5 @@
 ### Reverb - Intuitive Progression Platform
+#### Based on MERN Stack
 
 Self-development and training platform which prompts and pushes the user positively in such ways that helps in reaping out the best versions of himself/herself.
 Social Media Application with a slight twist in it. What is the X-Factor here?
